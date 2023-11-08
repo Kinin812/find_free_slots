@@ -1,12 +1,11 @@
-# Тестовое задание
+# TEST
 
-## Цель:
-Требуется сформировать список свободных окон по 30 минут.
+## Target:
+You need to create a list of free slots of 30 minutes each.
 
-## Задание:
+## Exercise:
 
-Доктор принимает с 9 утра до 9 вечера.
-Часть времени у него занята: приемы, обед, уборка кабинета.
+The doctor sees from 9 am to 9 pm. Part of his time is occupied: receptions, lunch, cleaning the office.
 
 busy = [
 
@@ -33,8 +32,8 @@ busy = [
 ]
 
 
-## Технологии
+## Technologies
 •	Python 3.11
 
-## Автор
+## Author
 [@Kinin812](https://github.com/Kinin812)
