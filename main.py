@@ -14,6 +14,7 @@ def add_free_slot(start: datetime) -> dict:
 
 class FreeSlots:
     """Class FreeSlots"""
+
     def __init__(self, busy_slots: list, start: str, stop: str, slot: int):
         self.busy = busy_slots
         self.start_work_day = convert_date(start)
@@ -26,10 +27,13 @@ class FreeSlots:
         ]
 
         for i in range(len(self.busy)):
-            self.schedule.append({'start': datetime.strptime(self.busy[i]['start'],
-                                                             "%H:%M"), 'stop': datetime.strptime(self.busy[i]['stop'],
-                                                                                                 "%H:%M")})
-        self.schedule: list[dict[datetime.time, datetime.time]] = sorted(self.schedule, key=lambda x: x['start'])
+            self.schedule.append(
+                {'start': datetime.strptime(self.busy[i]['start'],
+                                            "%H:%M"),
+                 'stop': datetime.strptime(self.busy[i]['stop'],
+                                           "%H:%M")})
+        self.schedule: list[dict[datetime.time, datetime.time]] = sorted(
+            self.schedule, key=lambda x: x['start'])
 
     def find_free_slots(self) -> list[dict[str, str]]:
         """Find & add free slots."""
@@ -37,13 +41,15 @@ class FreeSlots:
         for i in range(len(self.schedule) - 1):
             end: datetime = self.schedule[i + 1]['start']
             start: datetime = self.schedule[i]['stop']
-            free_slots_quantity: int = int((end - start).seconds / 60 // self.slot_length)
+            free_slots_quantity: int = int(
+                (end - start).seconds / 60 // self.slot_length)
             if free_slots_quantity > 0:
                 new_start: datetime = start
                 for _ in range(free_slots_quantity):
                     result.append(
                         {'start': new_start.strftime("%H:%M"),
-                         'stop': (new_start + timedelta(minutes=self.slot_length)).strftime("%H:%M")})
+                         'stop': (new_start + timedelta(
+                             minutes=self.slot_length)).strftime("%H:%M")})
                     new_start: datetime = add_free_slot(new_start)['stop']
 
         return result
